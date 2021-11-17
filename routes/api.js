@@ -8,7 +8,7 @@ const corsOptions = {
   allowedHeaders: ['Content-Type', 'Authorization'],
 }
 
-router.post('/crearUsuario', cors(corsOptions), (req, res) => {
+router.post('/crearusuario', cors(corsOptions), (req, res) => {
   let user = req.body
 
   db.SchemaEjemplo.create(user)
