@@ -32,7 +32,9 @@ router.get('/findall', cors(corsOptions), async (req, res) => {
 
 router.get('/getBalance', cors(corsOptions), async (req, res) => {
   try {
-    let result = await getBalance();
+    const { address } = req.query;
+    console.log('-> address:', address);
+    let result = await getBalance(address);
     res.json(result)
   } catch (err) {
     res.json(err)
