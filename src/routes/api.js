@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const cors = require('cors')
 const db = require('../models')
-const { getBalance } = require('../services/contractService');
+const { getBalance, createWallet } = require('../services/contractService');
 
 const corsOptions = {
   origin: process.env.CORS_ALLOW_ORIGIN || '*',
@@ -33,6 +33,15 @@ router.get('/findall', cors(corsOptions), async (req, res) => {
 router.get('/getBalance', cors(corsOptions), async (req, res) => {
   try {
     let result = await getBalance();
+    res.json(result)
+  } catch (err) {
+    res.json(err)
+  }
+})
+
+router.get('/createWallet', cors(corsOptions), async (req, res) => {
+  try {
+    const result = await createWallet();
     res.json(result)
   } catch (err) {
     res.json(err)

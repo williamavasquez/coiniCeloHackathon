@@ -1,5 +1,6 @@
 const Web3 = require('web3');
 const { newKitFromWeb3 } = require("@celo/contractkit");
+const { AccountUtils } = require("@celo/utils");
 
 const web3 = new Web3("https://alfajores-forno.celo-testnet.org")
 const kit = newKitFromWeb3(web3);
@@ -13,6 +14,15 @@ async function getBalance() {
     return { cusdBalance, celoBalance };
 }
 
+async function createWallet() {
+    const mnemonic = await AccountUtils.generateMnemonic();
+    console.log('=> mnemonic', mnemonic);
+    return mnemonic;
+    // const temp = AccountUtils.generateKeys('test', '123ABC_123abc');
+    // console.log('=> createWallet', temp);
+}
+
 module.exports = {
     getBalance,
+    createWallet,
 };
