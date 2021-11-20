@@ -1,8 +1,9 @@
 const express = require('express')
 const logger = require('morgan')
 const mongoose = require('mongoose')
-const dotenv = require('dotenv').config()
+const dotenv = require('dotenv').config({ path: '.env' })
 const api = require('./routes/api')
+const sms = require('./routes/sms')
 
 const PORT = process.env.PORT
 
@@ -20,6 +21,7 @@ mongoose.connect(process.env.MONGO_INSTANCE_URI, {
 
 // routes
 app.use('/api', api)
+app.use('/sms', sms)
 
 app.get('/', (req, res) => {
   res.end('app loaded')
