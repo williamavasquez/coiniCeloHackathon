@@ -41,9 +41,10 @@ router.get('/getBalance', cors(corsOptions), async (req, res) => {
   }
 })
 
-router.get('/createWallet', cors(corsOptions), async (req, res) => {
+router.post('/createWallet', cors(corsOptions), async (req, res) => {
   try {
-    const result = await createWallet();
+    const { password } = req.body;
+    const result = await createWallet(password);
     res.json(result)
   } catch (err) {
     res.json(err)
