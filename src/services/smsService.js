@@ -16,12 +16,10 @@ client.verify.services
     return callback(e)
   })
 
-const serviceCreation = () => {
-  console.log('running sms ')
-  console.log(serviceID)
+const serviceCreation = (phoneNumber) => {
   client.verify
     .services(serviceID)
-    .verifications.create({ to: `+${19738709840}`, channel: 'sms' })
+    .verifications.create({ to: phoneNumber, channel: 'sms' })
     .then((verification) => console.log(verification.status))
     .catch((e) => {
       console.log(e)
@@ -29,11 +27,11 @@ const serviceCreation = () => {
     })
 }
 
-const smsVerification = (code) => {
+const smsVerification = (code, phoneNumber) => {
   console.log(serviceID)
   client.verify
     .services(serviceID)
-    .verificationChecks.create({ to: '+19738709840', code })
+    .verificationChecks.create({ to: phoneNumber, code })
     .then((verification_check) => console.log(verification_check.status))
     .catch((e) => {
       console.log(e)

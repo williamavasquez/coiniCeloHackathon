@@ -11,19 +11,23 @@ const corsOptions = {
   allowedHeaders: ['Content-Type', 'Authorization'],
 }
 
-router.get('/getverificationcode', cors(corsOptions), async (req, res) => {
-  try {
-    const result = await serviceCreation()
-    res.json(result)
-  } catch (err) {
-    res.json(err)
+router.get(
+  '/getverificationcode/:number',
+  cors(corsOptions),
+  async (req, res) => {
+    try {
+      const result = await serviceCreation(number)
+      res.json(result)
+    } catch (err) {
+      res.json(err)
+    }
   }
-})
+)
 
 router.post('/verifyphone', cors(corsOptions), async (req, res) => {
   try {
-    console.log('---->', req.body)
-    const result = await smsVerification(req.body.code)
+    {code, phoneNumber} = req.body
+    const result = await smsVerification(code,phoneNumber)
     res.json(result)
   } catch (err) {
     res.json(err)
