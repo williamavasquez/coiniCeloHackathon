@@ -1,8 +1,11 @@
 const router = require('express').Router()
 const cors = require('cors')
 const db = require('../models')
+
 const { getBalance, createWallet } = require('../services/contractService')
-const { serviceCreation } = require('../services/smsService.js')
+const { getTransactions } = require('../services/transactionService')
+const { createUser } = require('../services/userService')
+
 const corsOptions = {
   origin: process.env.CORS_ALLOW_ORIGIN || '*',
   methods: ['GET', 'PUT', 'POST'],
@@ -30,10 +33,25 @@ router.get('/findall', cors(corsOptions), async (req, res) => {
   }
 })
 
+/**
+ * User endpoints
+ */
+router.post('/createUser', cors(corsOptions), async (req, res) => {
+  try {
+    const { phoneNumber, password } = req.body
+    const result = await createUser(phoneNumber, password)
+    res.json(result)
+  } catch (err) {
+    res.json(err)
+  }
+})
+
+/**
+ * Contract endpoints
+ */
 router.get('/getBalance', cors(corsOptions), async (req, res) => {
   try {
     const { address } = req.query
-    console.log('-> address:', address)
     let result = await getBalance(address)
     res.json(result)
   } catch (err) {
@@ -41,9 +59,23 @@ router.get('/getBalance', cors(corsOptions), async (req, res) => {
   }
 })
 
-router.get('/createWallet', cors(corsOptions), async (req, res) => {
+router.post('/createWallet', cors(corsOptions), async (req, res) => {
   try {
-    const result = await createWallet()
+    const { password } = req.body
+    const result = await createWallet(password)
+    res.json(result)
+  } catch (err) {
+    res.json(err)
+  }
+})
+
+/**
+ * Transaction endpoints
+ */
+router.get('/getTransactions', cors(corsOptions), async (req, res) => {
+  try {
+    const { address } = req.query
+    let result = await getTransactions(address)
     res.json(result)
   } catch (err) {
     res.json(err)
