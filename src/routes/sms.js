@@ -26,7 +26,7 @@ router.get(
 
 router.post('/verifyphone', cors(corsOptions), async (req, res) => {
   try {
-    {code, phoneNumber} = req.body
+    const {code, phoneNumber} = req.body
     const result = await smsVerification(code,phoneNumber)
     res.json(result)
   } catch (err) {

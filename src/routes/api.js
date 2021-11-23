@@ -4,6 +4,7 @@ const db = require('../models')
 
 const { getBalance, createWallet } = require('../services/contractService')
 const { getTransactions } = require('../services/transactionService')
+const transactionController = require('../controllers/transactionController');
 const { createUser } = require('../services/userService')
 
 const corsOptions = {
@@ -72,7 +73,9 @@ router.post('/createWallet', cors(corsOptions), async (req, res) => {
 /**
  * Transaction endpoints
  */
-router.get('/getTransactions', cors(corsOptions), async (req, res) => {
+router.get('/getTransactions', cors(corsOptions), transactionController.list);
+
+router.post('/transaction', cors(corsOptions), async (req, res) => {
   try {
     const { address } = req.query
     let result = await getTransactions(address)
