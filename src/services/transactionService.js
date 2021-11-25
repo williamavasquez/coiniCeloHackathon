@@ -1,24 +1,28 @@
 async function findAll() {
     return [
         {
-            amount: 0.2,
-            address: '',
-            contact: '',
-            date: '',
+          amount: 100000,
+          from: {
+              userId: '619ef76ae1c81a293ac2038f',
+              address: '0x87171711',
+          },
+          to: {
+              userId: '619ef76ae1c81a293091838f',
+              address: '0x91919123'
+          }
+        },
+        {
+          amount: 999000,
+          from: {
+              userId: '619ef76ae1c81a293ac2038f',
+              address: '0x87171711',
+          },
+          to: {
+              userId: '619ef76ae1c81a293091838f',
+              address: '0x91919123'
+          }
         }
     ];
-}
-
-async function create() {
-    let user = req.body
-
-    db.SchemaEjemplo.create(user)
-      .then((user) => {
-        res.json(user)
-      })
-      .catch((err) => {
-        res.json(err)
-      })
 }
 
 module.exports = {

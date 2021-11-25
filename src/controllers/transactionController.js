@@ -1,13 +1,26 @@
 const { findAll } = require('../services/transactionService');
 
 /**
- * Transaction endpoints
+ * list all transactions
  */
 async function list(req, res) {
     try {
-        const { address } = req.query
-        let result = await findAll(address)
+        const { userId } = req.query;
+        let result = await findAll(userId);
         res.json(result)
+    } catch (err) {
+        res.json(err)
+    }
+}
+
+/**
+ * create new transaction
+ */
+async function create(req, res) {
+    try {
+        const { amount, from, to } = req.body;
+        const { userId, address } = from;
+        res.json(true)
     } catch (err) {
         res.json(err)
     }
@@ -15,4 +28,5 @@ async function list(req, res) {
 
 module.exports = {
     list,
+    create,
 };
