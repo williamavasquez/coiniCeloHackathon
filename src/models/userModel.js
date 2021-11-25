@@ -2,11 +2,11 @@ const mongoose = require('mongoose')
 
 const Schema = mongoose.Schema
 
-const schemaAccount = new Schema(
+const schemaUser = new Schema(
   {
-    address: 'string',
     phone: 'string',
     qrcode: 'string',
+    address: 'string',
   },
   {
     timestamps: true,
@@ -16,6 +16,6 @@ const schemaAccount = new Schema(
   }
 )
 
-const SchemaAccount = mongoose.model('Account', schemaAccount)
+const SchemaUser = mongoose.model('User', schemaUser)
 
-module.exports = SchemaAccount
+module.exports = SchemaUser

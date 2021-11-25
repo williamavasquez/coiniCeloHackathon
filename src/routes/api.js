@@ -5,7 +5,8 @@ const db = require('../models')
 const { getBalance, createWallet } = require('../services/contractService')
 const { getTransactions } = require('../services/transactionService')
 const transactionController = require('../controllers/transactionController');
-const { createUser } = require('../services/userService')
+const userController = require('../controllers/userController');
+// const { createUser } = require('../services/userService')
 
 const corsOptions = {
   origin: process.env.CORS_ALLOW_ORIGIN || '*',
@@ -35,19 +36,6 @@ router.get('/findall', cors(corsOptions), async (req, res) => {
 })
 
 /**
- * User endpoints
- */
-router.post('/createUser', cors(corsOptions), async (req, res) => {
-  try {
-    const { phoneNumber, password } = req.body
-    const result = await createUser(phoneNumber, password)
-    res.json(result)
-  } catch (err) {
-    res.json(err)
-  }
-})
-
-/**
  * Contract endpoints
  */
 router.get('/getBalance', cors(corsOptions), async (req, res) => {
@@ -71,9 +59,14 @@ router.post('/createWallet', cors(corsOptions), async (req, res) => {
 })
 
 /**
+ * User endpoints
+ */
+router.post('/user', cors(corsOptions), userController.create);
+
+/**
  * Transaction endpoints
  */
-router.get('/getTransactions', cors(corsOptions), transactionController.list);
+router.get('/transactions', cors(corsOptions), transactionController.list);
 
 router.post('/transaction', cors(corsOptions), async (req, res) => {
   try {

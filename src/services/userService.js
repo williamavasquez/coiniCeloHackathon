@@ -1,8 +1,19 @@
-async function createUser (phoneNumber, password) {
-    const result = {
-        address: '',
+const db = require('../models')
+
+async function createUser (phone, address) {
+    const userData = {
+        phone,
+        qrcode: `your-phone-is-${phone}`,
+        address,
     };
-    return true;
+    try {
+        const user = await db.User.create(userData);
+        return user._id;
+      } catch (err) {
+        console.log('=> err:', err);
+        return err;
+      }
+
 }
 
 module.exports = {

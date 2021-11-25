@@ -1,5 +1,5 @@
 module.exports = {
   SchemaEjemplo: require('./ejemploModelo'),
-  Account: require('./accountModel'),
+  User: require('./userModel'),
   Transaction: require('./transactionModel'),
 }

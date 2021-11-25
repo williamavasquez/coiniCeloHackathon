@@ -29,6 +29,11 @@ async function createWallet(password) {
     console.log('=> mnemonic:', mnemonic);
     console.log('=> seed:', seed);
     console.log('=> keys:', keys);
+    const { address } = keys;
+    return {
+        mnemonic,
+        address
+    };
 }
 
 module.exports = {
