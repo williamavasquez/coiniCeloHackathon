@@ -15,7 +15,7 @@ async function getBalance(address) {
     const stabletoken = await kit.contracts.getStableToken()
     const cusdBalance = await stabletoken.balanceOf(address)
     const celoBalance = await goldtoken.balanceOf(address)
-    return { cusdBalance, celoBalance };
+    return { cusdBalance };
 }
 
 /**

@@ -1,12 +1,12 @@
-const { findAll } = require('../services/transactionService');
+const { getBalance } = require('../services/contractService');
 
 /**
  * Transaction endpoints
  */
-async function list(req, res) {
+async function balance(req, res) {
     try {
         const { address } = req.query
-        let result = await findAll(address)
+        let result = await getBalance(address)
         res.json(result)
     } catch (err) {
         res.json(err)
@@ -14,5 +14,5 @@ async function list(req, res) {
 }
 
 module.exports = {
-    list,
+    balance,
 };

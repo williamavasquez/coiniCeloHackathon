@@ -6,6 +6,7 @@ const { getBalance, createWallet } = require('../services/contractService')
 const { getTransactions } = require('../services/transactionService')
 const transactionController = require('../controllers/transactionController');
 const userController = require('../controllers/userController');
+const contractController = require('../controllers/contractController');
 // const { createUser } = require('../services/userService')
 
 const corsOptions = {
@@ -36,32 +37,11 @@ router.get('/findall', cors(corsOptions), async (req, res) => {
 })
 
 /**
- * Contract endpoints
- */
-router.get('/getBalance', cors(corsOptions), async (req, res) => {
-  try {
-    const { address } = req.query
-    let result = await getBalance(address)
-    res.json(result)
-  } catch (err) {
-    res.json(err)
-  }
-})
-
-router.post('/createWallet', cors(corsOptions), async (req, res) => {
-  try {
-    const { password } = req.body
-    const result = await createWallet(password)
-    res.json(result)
-  } catch (err) {
-    res.json(err)
-  }
-})
-
-/**
- * User endpoints
+ * Endpoints
  */
 router.post('/user', cors(corsOptions), userController.create);
+router.get('/user/:id', cors(corsOptions), userController.find);
+router.get('/balance', cors(corsOptions), contractController.balance);
 
 /**
  * Transaction endpoints

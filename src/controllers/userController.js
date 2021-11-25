@@ -16,6 +16,9 @@ async function create(req, res) {
     }
 }
 
+async function find(req, res) {}
+
 module.exports = {
     create,
+    find,
 };
