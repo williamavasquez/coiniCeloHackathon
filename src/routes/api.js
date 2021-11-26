@@ -16,7 +16,7 @@ const corsOptions = {
  * Endpoints
  */
 router.post('/user', cors(corsOptions), userController.create);
-router.post('/user/login', cors(corsOptions), userController.login);
+router.post('/login', cors(corsOptions), userController.login);
 router.get('/balance', cors(corsOptions), contractController.balance);
 router.get('/transaction', cors(corsOptions), transactionController.list);
 router.post('/transaction', cors(corsOptions), transactionController.create);
