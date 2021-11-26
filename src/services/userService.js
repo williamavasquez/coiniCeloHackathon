@@ -16,6 +16,19 @@ async function createUser (phone, address) {
 
 }
 
+async function findUser(phone) {
+  
+  try {
+      const user = await db.User.findOne({ phone })
+      return user._id;
+    } catch (err) {
+      console.log('=> err:', err);
+      return err;
+    }
+
+}
+
 module.exports = {
     createUser,
+    findUser,
 };

@@ -1,4 +1,4 @@
-const { createUser } = require('../services/userService');
+const { createUser, findUser } = require('../services/userService');
 const { createWallet } = require('../services/contractService');
 
 async function create(req, res) {
@@ -16,9 +16,19 @@ async function create(req, res) {
     }
 }
 
-async function find(req, res) {}
+async function login(req, res) {
+    try {
+        const { phone } = req.body
+        const userId = await findUser(phone);
+        res.json({
+            userId
+        })
+    } catch (err) {
+        res.json(err)
+    }
+}
 
 module.exports = {
     create,
-    find,
+    login,
 };
