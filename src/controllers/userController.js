@@ -5,7 +5,7 @@ async function create(req, res) {
     try {
         const { phone, password } = req.body
         const { mnemonic, address } = await createWallet(password);
-        const userId = await createUser(phone, mnemonic, address);
+        const userId = await createUser(phone, address);
         res.json({
             userId,
             address,

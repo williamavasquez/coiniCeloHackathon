@@ -5,7 +5,6 @@ const Schema = mongoose.Schema
 const schemaUser = new Schema(
   {
     phone: 'string',
-    qrcode: 'string',
     address: 'string',
   },
   {
