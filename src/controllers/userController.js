@@ -3,25 +3,24 @@ const { createSeephrase, createWallet } = require('../services/contractService')
 
 async function getSeedphrase(req, res) {
     try {
-        const seed = await createSeephrase(password);
+        const seed = await createSeephrase();
         res.json({ seed })
     } catch (err) {
-        res.json(err)
+        res.status(500).json(err)
     }
 }
 
 async function create(req, res) {
     try {
-        const { phone, password } = req.body
-        const { mnemonic, address } = await createWallet(password);
+        const { phone, password, mnemonic } = req.body
+        const { address } = await createWallet(mnemonic, password);
         const userId = await createUser(phone, address);
         res.json({
             userId,
             address,
-            mnemonic,
         })
     } catch (err) {
-        res.json(err)
+        res.status(500).json(err)
     }
 }
 
@@ -33,11 +32,12 @@ async function login(req, res) {
             userId
         })
     } catch (err) {
-        res.json(err)
+        res.status(500).json(err)
     }
 }
 
 module.exports = {
+    getSeedphrase,
     create,
     login,
 };

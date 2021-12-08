@@ -18,7 +18,7 @@ const corsOptions = {
  */
 router.get('/getverificationcode/:number', cors(corsOptions), smsController.sendVerificationCode);
 router.post('/verifyphone', cors(corsOptions), smsController.verifyPhone);
-router.post('/seedphrase', cors(corsOptions), userController.create);
+router.post('/seedphrase', cors(corsOptions), userController.getSeedphrase);
 router.post('/user', cors(corsOptions), userController.create);
 router.post('/login', cors(corsOptions), userController.login);
 router.get('/balance', cors(corsOptions), contractController.balance);

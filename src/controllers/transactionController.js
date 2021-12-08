@@ -10,7 +10,7 @@ async function list(req, res) {
         let result = await findAll(userId);
         res.json(result)
     } catch (err) {
-        res.json(err)
+        res.status(500).json(err)
     }
 }
 
@@ -26,7 +26,7 @@ async function create(req, res) {
         await sendToken(amount, from, to);
         res.json(true)
     } catch (err) {
-        res.json(err)
+        res.status(500).json(err)
     }
 }
 

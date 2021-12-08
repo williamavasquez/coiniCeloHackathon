@@ -12,7 +12,7 @@ async function balance(req, res) {
         let result = await getBalance(address)
         res.json(result)
     } catch (err) {
-        res.json(err)
+        res.status(500).json(err)
     }
 }
 

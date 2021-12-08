@@ -31,8 +31,8 @@ async function getBalance(address) {
  * Create wallet from password
  * @param {*} password 
  */
-async function createWallet(password) {
-    const mnemonic = await AccountUtils.generateMnemonic();
+async function createWallet(mnemonic, password) {
+    // const mnemonic = await AccountUtils.generateMnemonic();
     const seed = await AccountUtils.generateSeed(mnemonic, password);
     const keys = await AccountUtils.generateKeysFromSeed(seed);
     console.log('=> mnemonic:', mnemonic);
