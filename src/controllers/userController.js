@@ -1,5 +1,14 @@
 const { createUser, findUser } = require('../services/userService');
-const { createWallet } = require('../services/contractService');
+const { createSeephrase, createWallet } = require('../services/contractService');
+
+async function getSeedphrase(req, res) {
+    try {
+        const seed = await createSeephrase(password);
+        res.json({ seed })
+    } catch (err) {
+        res.json(err)
+    }
+}
 
 async function create(req, res) {
     try {

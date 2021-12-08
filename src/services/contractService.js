@@ -19,6 +19,15 @@ async function getBalance(address) {
 }
 
 /**
+ * Create random seed or mnemonic
+ * @param {*} password 
+ */
+ async function createSeephrase() {
+    const mnemonic = await AccountUtils.generateMnemonic();
+    return mnemonic;
+}
+
+/**
  * Create wallet from password
  * @param {*} password 
  */
@@ -68,6 +77,7 @@ async function sendToken(amount, from, to) {
 
 module.exports = {
     getBalance,
+    createSeephrase,
     createWallet,
     sendToken,
 };
